@@ -1,0 +1,261 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 222 47% 4%;
+  --fg: 210 40% 98%;
+  --muted: 215 28% 18%;
+  --card: 224 41% 10%;
+  --border: 215 26% 28%;
+  --accent: 198 93% 60%;
+
+  --museum-wall: #1a1a1f;
+  --museum-wall-light: #25252c;
+  --museum-gold: #c9a84c;
+  --museum-gold-dim: #8b7332;
+  --museum-cream: #f5f0e8;
+  --museum-plaque: #faf6ef;
+  --museum-floor: #12121a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: 222 47% 4%;
+    --fg: 210 40% 98%;
+    --muted: 216 34% 14%;
+    --card: 224 41% 10%;
+    --border: 215 24% 24%;
+    --accent: 199 89% 67%;
+  }
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html,
+body {
+  min-height: 100%;
+  scroll-behavior: smooth;
+  background: var(--museum-floor);
+  color: hsl(var(--fg));
+}
+
+body {
+  margin: 0;
+}
+
+/* ── Museum wall texture ─────────────────────────────────── */
+.museum-wall {
+  background-color: var(--museum-wall);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 50px,
+      rgba(255 255 255 / 0.008) 50px,
+      rgba(255 255 255 / 0.008) 51px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 50px,
+      rgba(255 255 255 / 0.008) 50px,
+      rgba(255 255 255 / 0.008) 51px
+    );
+}
+
+/* ── Spotlight effect on exhibition images ───────────────── */
+.spotlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 120% at 50% -20%,
+    rgba(255 248 220 / 0.25) 0%,
+    rgba(255 248 220 / 0.08) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.spotlight::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, rgba(255 248 220 / 0.15));
+  z-index: 3;
+}
+
+/* ── Gallery frame for exhibition pieces ─────────────────── */
+.gallery-frame {
+  border: 6px solid var(--museum-gold-dim);
+  box-shadow:
+    inset 0 0 20px rgba(0 0 0 / 0.6),
+    0 8px 32px rgba(0 0 0 / 0.7),
+    0 0 0 2px rgba(201 168 76 / 0.15);
+  background: #0a0a0a;
+}
+
+/* ── Museum plaque (those small info cards next to art) ──── */
+.museum-plaque {
+  background: var(--museum-plaque);
+  color: #2a2a2a;
+  border-left: 3px solid var(--museum-gold);
+  box-shadow:
+    0 2px 8px rgba(0 0 0 / 0.3),
+    0 1px 2px rgba(0 0 0 / 0.2);
+}
+
+/* ── Wall text (quotes inscribed on gallery wall) ────────── */
+.wall-text {
+  text-shadow: 0 0 40px rgba(255 248 220 / 0.1);
+  letter-spacing: 0.02em;
+}
+
+/* ── Room plate (room number sign on wall) ───────────────── */
+.room-plate {
+  background: linear-gradient(135deg, #2a2520, #1a1815);
+  border: 1px solid var(--museum-gold-dim);
+  box-shadow:
+    0 2px 8px rgba(0 0 0 / 0.5),
+    inset 0 1px 0 rgba(201 168 76 / 0.1);
+}
+
+/* ── Museum exhibit label ────────────────────────────────── */
+.exhibit-label {
+  background: rgba(255 255 255 / 0.04);
+  border: 1px solid rgba(255 255 255 / 0.08);
+  border-bottom: 2px solid rgba(201 168 76 / 0.2);
+}
+
+/* ── Floor reflection ────────────────────────────────────── */
+.museum-floor-reflection {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255 255 255 / 0.01) 80%,
+    rgba(255 255 255 / 0.03) 100%
+  );
+}
+
+/* ── Doorway transition between rooms ────────────────────── */
+.doorway {
+  position: relative;
+}
+
+.doorway::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, 80%);
+  height: 100%;
+  border-left: 2px solid rgba(201 168 76 / 0.08);
+  border-right: 2px solid rgba(201 168 76 / 0.08);
+  border-top: 3px solid rgba(201 168 76 / 0.12);
+  border-radius: 80px 80px 0 0;
+  pointer-events: none;
+}
+
+/* ── Ambient ceiling lights ──────────────────────────────── */
+.ceiling-light {
+  background: radial-gradient(
+    ellipse 300px 100px at 50% 0%,
+    rgba(255 248 220 / 0.06) 0%,
+    transparent 100%
+  );
+}
+
+/* ── Custom scrollbar for museum feel ────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--museum-floor);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--museum-gold-dim);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--museum-gold);
+}
+
+/* ── Guide speech bubble ─────────────────────────────────── */
+.guide-bubble {
+  background: rgba(255 255 255 / 0.06);
+  border: 1px solid rgba(255 255 255 / 0.1);
+  border-radius: 12px 12px 12px 2px;
+  padding: 16px 20px;
+  backdrop-filter: blur(8px);
+}
+
+.guide-bubble-arrow {
+  position: absolute;
+  left: -8px;
+  bottom: 12px;
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 8px solid rgba(255 255 255 / 0.1);
+}
+
+.guide-avatar {
+  filter: drop-shadow(0 4px 12px rgba(0 0 0 / 0.5));
+}
+
+/* ── Corridor between rooms ──────────────────────────────── */
+.corridor-section {
+  background: linear-gradient(
+    to bottom,
+    var(--museum-wall) 0%,
+    #0e0e14 40%,
+    #0e0e14 60%,
+    var(--museum-wall) 100%
+  );
+}
+
+.corridor-walls {
+  background:
+    linear-gradient(90deg, rgba(201 168 76 / 0.04) 0%, transparent 15%, transparent 85%, rgba(201 168 76 / 0.04) 100%);
+}
+
+.corridor-arch {
+  border-left: 1px solid rgba(201 168 76 / 0.15);
+  border-right: 1px solid rgba(201 168 76 / 0.15);
+  border-top: 2px solid rgba(201 168 76 / 0.2);
+  border-radius: 50px 50px 0 0;
+  background: radial-gradient(
+    ellipse 100% 60% at 50% 0%,
+    rgba(201 168 76 / 0.03) 0%,
+    transparent 70%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
